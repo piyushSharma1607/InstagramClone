@@ -29,8 +29,20 @@ class InstaCell: UITableViewCell {
 
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func setCellData(data: DataViewModel, index: IndexPath) {
+        let data = data.arrayListResult[index.row]
+        let fullName = "\(data.name.title) \(data.name.first) \(data.name.last)"
+        nameLabel.text = fullName.capitalized
+       countryLbl.text = "Age: \(data.location.country)"
+       mailLbl.text = "Email: \(data.email)"
+        StateLabel.text = "\(data.location.state.capitalized)"
+       smallImageView.downloaded(from: data.picture.thumbnail)
+       largeImageView.downloaded(from: data.picture.large)
+       cityLabel.text = "\(data.location.city)"
+       streetNoLbl.text = "\(data.location.street.number) \(data.location.street.name)"
     }
+    
+    
+    
     
 }

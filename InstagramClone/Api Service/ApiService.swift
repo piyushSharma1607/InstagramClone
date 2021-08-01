@@ -7,7 +7,7 @@
 
 import Foundation
 
-let baseURL = "https://randomuser.me/api/?results=300"
+let baseURL = "https://randomuser.me/api/?results=200"
 let finalUrl = URL(string: baseURL)
 
 class ApiService {
@@ -23,8 +23,7 @@ class ApiService {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error == nil {
                     if let data = data {
-//                        print(String(data:data, encoding: .utf8))
-//                        print(response)
+
                         do{
                             if let response = try? JSONDecoder().decode(UserModel.self, from: data) {
                                 self.dataModel = response.results

@@ -44,7 +44,7 @@ class ViewController: UIViewController {
             }
 }
 
-//MARK: - Extension
+//MARK: - Extension for TableView
 
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,16 +56,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InstaCell", for: indexPath) as! InstaCell
-        let data = dataViewModel.arrayListResult[indexPath.row]
-        let fullName = "\(data.name.title) \(data.name.first.capitalized) \(data.name.last)"
-        cell.nameLabel.text = fullName
-        cell.countryLbl.text = "Age: \(data.location.country)"
-        cell.mailLbl.text = "Email: \(data.email)"
-        cell.StateLabel.text = "\(data.location.state)"
-        cell.smallImageView.downloaded(from: data.picture.thumbnail)
-        cell.largeImageView.downloaded(from: data.picture.large)
-        cell.cityLabel.text = "\(data.location.city)"
-        cell.streetNoLbl.text = "\(data.location.street.number) \(data.location.street.name)"
+        cell.setCellData(data: dataViewModel, index: indexPath)
         return cell
     }
 }
@@ -88,14 +79,15 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         collectionCell.storyImage.downloaded(from: data.picture.thumbnail)
         return collectionCell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 3
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 3
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.layer.frame.width / 6
+        let width = collectionView.layer.bounds.width - (UICollectionViewCell().layer.frame.width / 2)
         let height = collectionView.layer.bounds.height
         return CGSize(width: width, height: height)
     }

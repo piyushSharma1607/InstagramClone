@@ -22,10 +22,9 @@ class DataViewModel: NSObject {
     func callTheResponseData() {
         self.apiService.getApiResponse {  modelData, err in
             if err != nil {
-                print(err?.localizedDescription)
+
             } else {
                 self.arrayListResult = (modelData!.results)
-                
                 DispatchQueue.main.async {
                     self.vc?.instaTableView.reloadData()
                     self.vc?.topCollectionView.reloadData()
